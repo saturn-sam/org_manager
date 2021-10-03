@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <style>
+    @page {
+    size: A4 landscape;
+}
+    </style>
+  </head>
+  <body>
+    
+
+    <div class="container">
+      
+        <div class="container px-0">
+            <div class="row">
+                <img class="mx-auto d-block" style="width: 150px;" src="{{logo}}" alt="">
+                <b>Meeting Minutes of Meeting {{meetings.number}}</b>
+                <div class="d-flex">
+                    <h6>
+                        <b>
+                            Meeting Status: &nbsp;&nbsp;
+                        </b>
+                    </h6>
+                    {% if meetings.final_approval != 0 %}
+                        <span>Closed</span>
+                    {% else %}
+                        <span>Open</span>                                                   
+                    {% endif %}
+                </div>                  
+                <div class="d-flex"><h6><b>Meeting Date: &nbsp;&nbsp;</b></h6><span> {{meetings.date}}</span></div>
+                <div class="d-flex"><h6><b>Meeting Chair: &nbsp;&nbsp;</b></h6><span> {{meetings.chair.get_full_name}}</span></div>
+                <div class="d-flex"><h6><b>Meeting Place: &nbsp;&nbsp;</b></h6><span> {{meetings.place}}</span></div>
+                <div class="d-flex"><h6><b>Meeting Type: &nbsp;&nbsp;</b></h6><span> {{meetings.mtype}}</span></div>
+                <div class="d-flex"><h6><b>Minute Taker: &nbsp;&nbsp;</b></h6><span> {{meetings.minute_taker.get_full_name}}</span></div>
+                <h6><b>Attendee: </b></h6>
+                <div class="col-md-4">
+                    <table id="attend-table" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Attendee</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for attendee in attendees %}
+                                <tr>
+                                    <td>{{attendee.attendee.get_full_name}}</td>
+
+
+                                    
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>                                
+                </div></br>
+
+
+                <h6><b>Agenda: </b></h6>
+
+                <table id="agend-table" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Topic initiator</th>
+                            <th>Discussion</th>
+                            <th>Action</th>
+                            <th>Responsible Person</th>
+                            <th>Deadline</th>
+                            <th>Response</th>
+                            <th>Response Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for agenda in agendas %}
+                            <tr>
+                                <td>{{agenda.topic}}</td>
+                                <td>{{agenda.topic_initiator.get_full_name}}</td>
+                                <td>{{agenda.discussion}}</td>
+                                <td>{{agenda.action}}</td>
+                                <td>{{agenda.responsible_person.get_full_name}}</td>
+                                <td>{{agenda.deadline}}</td>
+                                <td> 
+                                {% if agenda.response_from_responsible_person %}
+                                    {{agenda.response_from_responsible_person}}
+                                {% else %}
+                                    {% now "Y-m-d" as todays_date %}
+                                    {% if todays_date > agenda.deadline|date:"Y-m-d" %}
+                                        <span class="badge bg-danger">No Response</span>
+                                    {% else %}
+                                        <span class="badge bg-warning">No Response</span>
+                                    {% endif %}
+                                {% endif %}
+                                </td>
+                                <td>{% if agenda.response_date %}
+                                {{agenda.response_date}}
+                                {% else %}
+                                {% endif %} </td>
+
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

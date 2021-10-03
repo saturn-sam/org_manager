@@ -1,0 +1,129 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Announcement {% endblock %} 
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+  
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">All Announcement</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Sl.</th>
+                                <th>Subject</th>
+                                <th>Announcement</th>
+                                <th>Announcer</th>
+                                <th>Announcement Publish Date</th>
+                                <th>Announcement Expire Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for anns in ann %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{anns.announcement_subject}}</td>
+                                <td>{{anns.announcement}}</td>
+                                <td>{{anns.announcer.get_full_name}}</td>
+                                <td>{{anns.announcement_add_date}}</td>
+                                <td>{{anns.announce_dismiss_date}}</td>
+                                <td class="archive-announcement-{{anns.id}}">
+                                {% now "Y-m-d" as todays_date %}
+                                {% if todays_date > anns.announce_dismiss_date|date:"Y-m-d" %}
+                                    Archived
+                                {% else %}
+                                    {% if anns.unpublish_status == False %}
+                                        Active <button type="button" class="btn btn-danger btn-sm" id="archive-announcement-btn" data-id="{{anns.id}}" data-bs-toggle="modal" data-bs-target="#archive-announcement">Archive</button></td>
+                                    {% else %}
+                                        Archived <button type="button" class="btn btn-success btn-sm" id="activate-announcement-btn" data-id="{{anns.id}}" data-bs-toggle="modal" data-bs-target="#activate-announcement">Activate</button></td>
+                                    {% endif %} 
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Activate Announcement Start -->
+<div class="modal fade" id="activate-announcement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Activate Announcement</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to Activate this Announcement?
+      </div>
+      <div class="modal-footer">
+        <form method=POST>
+          {% csrf_token %}
+          <input type="hidden" id="activate-announcement-id-container">
+
+          <div id="user-disable-buttons">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">No, Back</button>
+            <button type="button" class="btn btn-success activate-announcement-submit">Yes, Activate</button>
+          </div>
+          
+          <div id="user-disable-loader" style="display:none;">
+            <img src="{% static 'image/loader.gif' %}" alt="loading">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Activate Announcement End -->
+<!-- Modal for Archive Announcement Start -->
+<div class="modal fade" id="archive-announcement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Archive Announcement</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to Archive this Announcement?
+      </div>
+      <div class="modal-footer">
+        <form method=POST>
+          {% csrf_token %}
+          <input type="hidden" id="archive-announcement-id-container">
+
+          <div id="user-disable-buttons">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">No, Back</button>
+            <button type="button" class="btn btn-success archive-announcement-submit">Yes, Archive</button>
+          </div>
+          
+          <div id="user-disable-loader" style="display:none;">
+            <img src="{% static 'image/loader.gif' %}" alt="loading">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Archive Announcement End -->
+{% endblock content %}
+
+{% block javascripts %}
+
+{% endblock javascripts %}

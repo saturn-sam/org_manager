@@ -1,0 +1,85 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} View Attendee {% endblock %} 
+
+
+{% block stylesheets %}
+
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/dataTables.bootstrap5.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/responsive.bootstrap5.min.css' %}">
+
+{% endblock stylesheets %}
+
+  
+
+{% block content %}
+
+<div class="content-wrapper">
+    <div class="hidden-class">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'meeting-home' %}">Meeting Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'meeting-add' %}">Add Meeting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'agenda-add' %}">Add Meeting Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'attendance' %}">Attendance</a>
+                    </li>                            
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-10 mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Attendee of meeting  <b>{{meeting_number}}</b></h5>
+                </div>
+                <div class="card-body">
+                    <table id="example3" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Attendee</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for attendee in attendees %}
+                                <tr>
+                                    <td>{{attendee.attendee.get_full_name}}</td>
+
+
+                                    
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/responsive.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+
+{% endblock javascripts %}

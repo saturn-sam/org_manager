@@ -1,0 +1,136 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Expenditure Report {% endblock %} 
+
+
+{% block stylesheets %}
+
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/dataTables.bootstrap5.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/responsive.bootstrap5.min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap-multiselect/css/BsMultiSelect.min.css' %}">
+
+
+
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content-wrapper">
+      <div class="row mt-3">
+        <div class="profile-body mt-3">
+            <div class="d-flex justify-content-center ">
+                <div class="col-md-4 border p-3">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                            <fieldset class="form-group">
+                                <h5>Expenditure Report</h5>
+                                <hr>
+                                <div class="">
+
+                                    <strong>Select Expenditure Type:</strong>
+                                    <select name="exp_type" id="multiple-checkboxes" class="form-control"  multiple="multiple">
+                                        <option value="all">All</option>
+                                    {% for x,y in re_form.fields.expenditure_type.choices %}
+
+                                        <option value="{{ x }}">{{ y }}</option>
+                                    {% endfor %}
+                                    </select>
+                                </div><br>
+                            
+                            </fieldset>
+
+                        <div class="form-group justify-content-between">
+                            <input class="btn btn-success" type="submit" value="show" name="show">
+                            <input class="btn btn-success" type="submit" value="download" name="download">
+                        </div>
+                    </form>
+                </div>                
+            </div>
+        </div>
+      </div>
+
+    {% if exps %}
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Expenditure Report</h5>
+                    </div>
+                    <div class="card-body">
+                        <table id="deposite-all-table" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Expenditure Type</th>
+                                    <th>Expenditure Source</th>
+                                    <th>Description</th>
+                                    <th>Expenditure Date</th>
+                                    <th>Info. Submitted by</th>
+                                    <th>Submission Date</th>
+                                    <th>Approved By</th>
+                                    <th>Approval Date</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for exp in exps %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{exp.expenditure_type}}</td>
+                                    <td>{{exp.expenditure_source}}</td>
+                                    <td>{{exp.description}}</td>
+                                    <td>{{exp.expenditure_date}}</td>
+                                    <td>{{exp.insert_by.get_full_name}}</td>
+                                    <td>{{exp.insert_date}}</td>  
+                                    <td>{{exp.approve_by.get_full_name}}</td>
+                                    <td>{{exp.approve_date}}</td>  
+                                    <td>{{exp.amount}}</td>                            
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tbody>
+                            <tr class="border-bottom-0">
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border"><b>Total</b></td>
+                                <td class="border"><b>{{exp_amount.amount__sum}}</b></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+    <script src="{% static 'vendor/jQuery/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'vendor/popper/popper.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap-multiselect/js/BsMultiSelect.min.js' %}"></script>
+
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/responsive.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+    
+
+    <script>
+    $(document).ready(function() {
+        $('#multiple-checkboxes').bsMultiSelect({
+        });
+    });
+    </script>
+{% endblock javascripts %}

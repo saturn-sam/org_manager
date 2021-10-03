@@ -1,0 +1,85 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Deposit Report of {% if request.user.get_full_name %} {{request.user.get_full_name}} {% else %} {{request.user.email}} {% endif %} {% endblock %} 
+
+
+{% block stylesheets %}
+
+
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/dataTables.bootstrap5.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/responsive.bootstrap5.min.css' %}">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content-wrapper">
+      <div class="row mt-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">All Deposit Report of {% if request.user.get_full_name %} {{request.user.get_full_name}} {% else %} {{request.user.email}} {% endif %}</h5>
+                </div>
+                <div class="card-body">
+                    <table id="deposite-view-table" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Member's Name</th>
+                                <th>Subscription Month</th>
+                                <th>Amount</th>
+                                <th>Document</th>
+                                <th>Bank Ref. Number</th>
+                                <th>Info. Submitted by</th>
+                                <th>Submission Date</th>
+                                <th>Approve/Deny Date</th>
+                                <th>Approve/Deny by</th>
+                                <th>Download Receipt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for all_deposit in all_deposits %}
+                            <tr>
+                                <td>{% if all_deposit.approve_status == 0 %}
+                                  <span class="badge bg-warning">Pending</span>
+                                {% elif all_deposit.approve_status == 1 %}
+                                  <span class="badge bg-success">Approved</span>
+                                {% else %}
+                                  <span class="badge bg-danger">Denied</span>
+                                {% endif %} </td>
+                                <td>{{all_deposit.member_name.get_full_name}}</td>
+                                <td>{{all_deposit.sub_of}}</td>
+                                <td>{{all_deposit.amount}}</td>
+                                <td><a href="{{all_deposit.recipt_image.url}}">View</a></td>
+                                <td>{{all_deposit.bank_ref_num}}</td>
+                                <td>{{all_deposit.insert_by.get_full_name}}</td>
+                                <td>{{all_deposit.insert_date}}</td>
+                                <td>{% if all_deposit.approve_status != 0 %}
+                                  {{all_deposit.appove_date}}
+                                {% endif %} </td>
+                                <td>{% if all_deposit.approve_status != 0 %}
+                                  {{all_deposit.approve_by.get_full_name}}
+                                {% endif %} </td>
+                                <td>{% if request.user == all_deposit.member_name and all_deposit.approve_status == 1 %}
+                                  <a class="btn btn-info" href="../../media/pdfs/Receipt_{{all_deposit.sub_of}}_{{all_deposit.member_name.email}}.pdf">Download</a> 
+                                {% endif %}  </td>                                
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/responsive.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+{% endblock javascripts %}

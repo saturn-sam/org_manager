@@ -1,0 +1,368 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Profile of {{user_view.get_full_name}} {% endblock %} 
+
+{% block body_class %} sidebar-mini {% endblock body_class %}
+
+{% block stylesheets %}
+
+
+{% endblock stylesheets %}
+
+{% block content %}  
+
+    <section class="content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+
+            <div class="card card-primary card-outline mt-3">
+              <div class="card-body box-profile">
+                <div class="text-left">
+                  <img class="profile-user-img img-fluid"
+                       src="{{user_view.profile.image.url}}"
+                       alt="User profile picture">
+                </div>
+
+                <h3 class="profile-username text-left">
+                  {{ user_view.get_full_name}} ({{user_view.profile.member_id}})
+                </h3>
+
+                <p class="text-muted text-left">
+                  {{ user_view.email }}
+                </p>
+
+                <p class="text-muted text-left">
+                  {{user_view.profile.phone}}
+                </p>
+
+
+
+                
+              </div>
+            </div>
+
+            <div class="card card-primary mt-3">
+              <div class="card-header">
+                <h3 class="card-title">Details of Member</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong> Father's Name</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {% if user_view.profile.father_or_husband_name != "NULL" %}
+                      {{user_view.profile.father_or_husband_name}}
+                    {% endif %}
+                  </div>
+                </div>
+                
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong> Mother's Name</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {% if user_view.profile.mother_name != "NULL" %}
+                      {{user_view.profile.mother_name}}
+                    {% endif %}
+                  </div>
+                </div>
+                
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong> Permanent Address</strong>
+                  </div>
+                  <div class="col-md-4">
+                    Vill: {% if user_view.profile.per_vill != "NULL" %}
+                      {{user_view.profile.per_vill}}
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4">
+                    PO: {% if user_view.profile.per_po != "NULL" %}
+                      {{user_view.profile.per_po}}
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    
+                  </div>
+                  <div class="col-md-4">
+                    PS: {% if user_view.profile.per_ps != "NULL" %}
+                      {{user_view.profile.per_ps}}
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4">
+                    Dist: {% if user_view.profile.per_dist != "NULL" %}
+                      {{user_view.profile.per_dist}}
+                    {% endif %}
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong> Present Address</strong>
+                  </div>
+                  <div class="col-md-4">
+                    Vill: {% if user_view.profile.pre_vill != "NULL" %}
+                      {{user_view.profile.pre_vill}}
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4">
+                    PO: {% if user_view.profile.pre_po != "NULL" %}
+                      {{user_view.profile.pre_po}}
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    
+                  </div>
+                  <div class="col-md-4">
+                    PS: {% if user_view.profile.pre_ps != "NULL" %}
+                      {{user_view.profile.pre_ps}}
+                    {% endif %} 
+                  </div>
+                  <div class="col-md-4">
+                    Dist: {% if user_view.profile.pre_dist != "NULL" %}
+                      {{user_view.profile.pre_dist}}
+                    {% endif %} 
+                  </div>
+                </div>
+                
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong>Date of Birth</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {{user_view.profile.dob}}
+                  </div>
+                  <div class="col-md-1">
+                    <strong>Age</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {{age}} years
+                  </div>
+                </div>
+                
+                <hr>
+
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong> Blood Group</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {{user_view.profile.blood_group}}
+                  </div>
+                </div>
+                
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong>NID No.</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {% if user_view.profile.nid != "NULL" %}
+                      {{user_view.profile.nid}}
+                    {% endif %} 
+                  </div>
+                  <div class="col-md-1">
+                    <strong>Passwort No.</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {% if user_view.profile.nid != "NULL" %}
+                      {{user_view.profile.passport}}
+                    {% endif %}
+                  </div>
+                </div>
+                
+                <hr>
+
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong> Driving License No.</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {% if user_view.profile.driving_license != "NULL" %}
+                      {{user_view.profile.driving_license}}
+                    {% endif %} 
+                  </div>
+                  <div class="col-md-1">
+                    <strong> TIN</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {% if user_view.profile.tin != "NULL" %}
+                      {{user_view.profile.tin}}
+                    {% endif %}
+                  </div>
+                </div>
+                
+                <hr>               
+
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong> Profession</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {% if user_view.profile.profession != "NULL" %}
+                      {{user_view.profile.profession}}
+                    {% endif %} 
+                  </div>
+                  <div class="col-md-1">
+                    <strong> Religion</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {% if user_view.profile.religion != "NULL" %}
+                      {{user_view.profile.religion}}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card-primary mt-3">
+              <div class="card-header">
+                <h3 class="card-title">Details of Nominee</h3>
+              </div>
+              <div class="card-body">
+                <div class="text-left">
+                  <img class="profile-user-img img-fluid"
+                       src="{{user_view.profile.nominee_image.url}}"
+                       alt="Nominee picture">
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong> Full Name</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {% if user_view.profile.nominee_name != "NULL" %}
+                      {{user_view.profile.nominee_name}}
+                    {% endif %}
+                  </div>
+                </div>
+                
+                <hr>   
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong> Father/Husband’s Name</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {% if user_view.profile.nominee_father_or_husband_name != "NULL" %}
+                      {{user_view.profile.nominee_father_or_husband_name}}
+                    {% endif %}
+                  </div>
+                </div>
+                
+                <hr> 
+
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong> Mother’s Name</strong>
+                  </div>
+                  <div class="col-md-4">
+                    {% if user_view.profile.nominee_mother_name != "NULL" %}
+                      {{user_view.profile.nominee_mother_name}}
+                    {% endif %}
+                  </div>
+                </div>
+                
+                <hr> 
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong> Permanent Address</strong>
+                  </div>
+                  <div class="col-md-4">
+                    Vill: {% if user_view.profile.nominee_per_vill != "NULL" %}
+                      {{user_view.profile.nominee_per_vill}}
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4">
+                    PO: {% if user_view.profile.nominee_per_po != "NULL" %}
+                      {{user_view.profile.nominee_per_po}}
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    
+                  </div>
+                  <div class="col-md-4">
+                    PS: {% if user_view.profile.nominee_per_ps != "NULL" %}
+                      {{user_view.profile.nominee_per_ps}}
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4">
+                    Dist: {% if user_view.profile.nominee_per_dist != "NULL" %}
+                      {{user_view.profile.nominee_per_dist}}
+                    {% endif %}
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <strong> Present Address</strong>
+                  </div>
+                  <div class="col-md-4">
+                    Vill: {% if user_view.profile.nominee_pre_vill != "NULL" %}
+                      {{user_view.profile.nominee_pre_vill}}
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4">
+                    PO: {% if user_view.profile.nominee_pre_po != "NULL" %}
+                      {{user_view.profile.nominee_pre_po}}
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    
+                  </div>
+                  <div class="col-md-4">
+                    PS: {% if user_view.profile.nominee_pre_ps != "NULL" %}
+                      {{user_view.profile.nominee_pre_ps}}
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4">
+                    Dist: {% if user_view.profile.nominee_pre_dist != "NULL" %}
+                      {{user_view.profile.nominee_pre_dist}}
+                    {% endif %}
+                  </div>
+                </div>
+             
+                
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+{% endblock content %}
+{% block javascripts %}
+
+
+
+{% endblock javascripts %}  

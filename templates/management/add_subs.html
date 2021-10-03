@@ -1,0 +1,48 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Profile {% endblock %} 
+
+{% block body_class %} Add Subscriptions {% endblock body_class %}
+
+{% block stylesheets %}
+
+
+
+{% endblock stylesheets %}
+
+  
+
+{% block content %}
+
+<div class="content-wrapper">
+    <div class="page-body">
+        <div class="container">
+            <div class="profile-body">
+                <div class="col-md-6 ms-auto me-auto">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group mt-5">
+                            <h3>Add Subscription Month</h3>
+                            <hr>
+                            {{form_s|crispy}}
+                        </fieldset>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-success btn-block" type="submit">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block javascripts %}
+
+
+{% endblock javascripts %}

@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/static/image/favicon.ico" type="image/x-icon">
+
+
+  <title>
+    Uttaran - {% block title %}{% endblock %}
+  </title> 
+ 
+  {% block stylesheets %}
+  {% endblock stylesheets %}
+
+</head>
+<body>
+
+  {% block content %}
+  {% endblock content %}
+
+
+  {% block javascripts %}
+  {% endblock javascripts %}
+
+
+</body>
+</html>

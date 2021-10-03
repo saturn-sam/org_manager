@@ -1,0 +1,87 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+      Uttaran - {% block title %}{% endblock %}
+    </title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/image/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'vendor/fontawesome-pro/css/all.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% block stylesheets %}{% endblock stylesheets %}
+</head>
+
+<body>
+    <!-- navbar start -->
+    {% include 'includes/navbar.html' %}
+    <!-- navbar end -->
+    
+    <!-- offcanvas menu start -->
+    {% include 'includes/sidebar.html' %}
+    <!-- offcanvas menu ends  -->
+
+    <!-- main start -->
+    <main class="mt-5 pt-3">
+        <div class="container-fluid">
+        {% block content %}{% endblock content %}
+        </div>
+    
+    </main>
+    <!-- main end -->
+    {% include 'includes/footer.html' %}
+
+
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/jQuery/jquery-3.6.0.min.js' %}"></script>
+    
+    {% block javascripts %}
+    
+    {% endblock javascripts %}
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'vendor/toastr/toastr.min.css'%}">
+    <script src="{% static 'vendor/toastr/toastr.min.js'%}"></script>
+    {% if messages %}
+    {% for m in messages %}
+
+        <script>
+            $(document).ready(function() {
+                toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+                }
+            });
+        toastr.{{m.tags}}('{{m}}');
+
+        </script>
+    {% endfor %}
+
+    {% endif %}
+</body>
+
+</html>

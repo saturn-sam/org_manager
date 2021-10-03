@@ -1,0 +1,670 @@
+2021-07-07 22:06:57 [ERROR   ] (log.log_response) Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\org_manager\home\views.py", line 15, in index
+    pending_user_approval = Profile.object.filter(disable_status=1, user__is_active=0 )
+AttributeError: type object 'Profile' has no attribute 'object'
+2021-07-07 22:36:33 [ERROR   ] (log.log_response) Internal Server Error: /accounting/dashboard
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\org_manager\accounting\views.py", line 54, in accounts_dashboard
+    return render(request, 'accounting/accounts-dashboard.html', context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader_tags.py", line 195, in render
+    return template.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 692, in resolve
+    arg_vals.append(arg.resolve(context))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 848, in _resolve_lookup
+    raise VariableDoesNotExist("Failed lookup for key "
+django.template.base.VariableDoesNotExist: Failed lookup for key [pending_deposit] in [{'True': True, 'False': False, 'None': None}, {}, {}, {'all_deposits': <QuerySet [<Deposite: Samrat2>, <Deposite: Rezwan>, <Deposite: Samrat2>, <Deposite: Md. Samrat Uz>, <Deposite: Md. Samrat Uz>, <Deposite: Md. Samrat Uz>, <Deposite: Rezwan>, <Deposite: Rezwan>, <Deposite: Rezwan>, <Deposite: Md. Samrat Uz>, <Deposite: Md. Samrat Uz>]>, 'month_wise_deposit': <QuerySet [{'subs_of': 'June 2021', 'deposite_user__member_name__first_name': None}, {'subs_of': 'May 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}, {'subs_of': 'April 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}, {'subs_of': 'March 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}, {'subs_of': 'February 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}, {'subs_of': 'January 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}]>, 'all_earnings': <QuerySet [<Earning: Member's Deposit>, <Earning: Savings Certificate>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Savings Certificate>, <Earning: Member's Deposit>]>, 'all_expenditures': <QuerySet [<Expenditure: Stationary>, <Expenditure: Savings Certificate>]>, 'total_deposit_individual': {'amount__sum': 15075}, 'due_counter': 1}]
+2021-07-07 22:37:01 [ERROR   ] (log.log_response) Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\org_manager\home\views.py", line 121, in profile
+    return render(request, 'home/profile.html', context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader_tags.py", line 195, in render
+    return template.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 692, in resolve
+    arg_vals.append(arg.resolve(context))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 848, in _resolve_lookup
+    raise VariableDoesNotExist("Failed lookup for key "
+django.template.base.VariableDoesNotExist: Failed lookup for key [pending_deposit] in [{'True': True, 'False': False, 'None': None}, {}, {}, {'age': 29}]
+2021-07-07 22:37:07 [ERROR   ] (log.log_response) Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\org_manager\home\views.py", line 121, in profile
+    return render(request, 'home/profile.html', context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader_tags.py", line 195, in render
+    return template.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 692, in resolve
+    arg_vals.append(arg.resolve(context))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 848, in _resolve_lookup
+    raise VariableDoesNotExist("Failed lookup for key "
+django.template.base.VariableDoesNotExist: Failed lookup for key [pending_deposit] in [{'True': True, 'False': False, 'None': None}, {}, {}, {'age': 29}]
+2021-07-07 23:19:33 [ERROR   ] (log.log_response) Internal Server Error: /accounting/dashboard
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\org_manager\accounting\views.py", line 54, in accounts_dashboard
+    return render(request, 'accounting/accounts-dashboard.html', context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader_tags.py", line 195, in render
+    return template.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 692, in resolve
+    arg_vals.append(arg.resolve(context))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 848, in _resolve_lookup
+    raise VariableDoesNotExist("Failed lookup for key "
+django.template.base.VariableDoesNotExist: Failed lookup for key [pending_deposit] in [{'True': True, 'False': False, 'None': None}, {}, {}, {'all_deposits': <QuerySet [<Deposite: Samrat2>, <Deposite: Rezwan>, <Deposite: Samrat2>, <Deposite: Md. Samrat Uz>, <Deposite: Md. Samrat Uz>, <Deposite: Md. Samrat Uz>, <Deposite: Rezwan>, <Deposite: Rezwan>, <Deposite: Rezwan>, <Deposite: Md. Samrat Uz>, <Deposite: Md. Samrat Uz>]>, 'month_wise_deposit': <QuerySet [{'subs_of': 'June 2021', 'deposite_user__member_name__first_name': None}, {'subs_of': 'May 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}, {'subs_of': 'April 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}, {'subs_of': 'March 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}, {'subs_of': 'February 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}, {'subs_of': 'January 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}]>, 'all_earnings': <QuerySet [<Earning: Member's Deposit>, <Earning: Savings Certificate>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Savings Certificate>, <Earning: Member's Deposit>]>, 'all_expenditures': <QuerySet [<Expenditure: Stationary>, <Expenditure: Savings Certificate>]>, 'total_deposit_individual': {'amount__sum': 15075}, 'due_counter': 1}]
+2021-07-07 23:25:11 [ERROR   ] (log.log_response) Internal Server Error: /accounting/dashboard
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'pending_deposit'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\org_manager\accounting\views.py", line 54, in accounts_dashboard
+    return render(request, 'accounting/accounts-dashboard.html', context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\loader_tags.py", line 195, in render
+    return template.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 692, in resolve
+    arg_vals.append(arg.resolve(context))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\template\base.py", line 848, in _resolve_lookup
+    raise VariableDoesNotExist("Failed lookup for key "
+django.template.base.VariableDoesNotExist: Failed lookup for key [pending_deposit] in [{'True': True, 'False': False, 'None': None}, {}, {}, {'all_deposits': <QuerySet [<Deposite: Samrat2>, <Deposite: Rezwan>, <Deposite: Samrat2>, <Deposite: Md. Samrat Uz>, <Deposite: Md. Samrat Uz>, <Deposite: Md. Samrat Uz>, <Deposite: Rezwan>, <Deposite: Rezwan>, <Deposite: Rezwan>, <Deposite: Md. Samrat Uz>, <Deposite: Md. Samrat Uz>]>, 'month_wise_deposit': <QuerySet [{'subs_of': 'June 2021', 'deposite_user__member_name__first_name': None}, {'subs_of': 'May 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}, {'subs_of': 'April 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}, {'subs_of': 'March 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}, {'subs_of': 'February 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}, {'subs_of': 'January 2021', 'deposite_user__member_name__first_name': 'Md. Samrat Uz'}]>, 'all_earnings': <QuerySet [<Earning: Member's Deposit>, <Earning: Savings Certificate>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Member's Deposit>, <Earning: Savings Certificate>, <Earning: Member's Deposit>]>, 'all_expenditures': <QuerySet [<Expenditure: Stationary>, <Expenditure: Savings Certificate>]>, 'total_deposit_individual': {'amount__sum': 15075}, 'due_counter': 1}]
+2021-07-07 23:37:18 [ERROR   ] (urls.url_join) Relative URI reference without a base URI: <link href="/static/vendor/bootstrap/css/bootstrap.min.css">
+2021-07-09 10:32:39 [ERROR   ] (log.log_response) Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\base.py", line 233, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\sqlite3\base.py", line 423, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 20, in _wrapped_view
+    if test_func(request.user):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 44, in <lambda>
+    lambda u: u.is_authenticated,
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\utils\functional.py", line 246, in inner
+    self._setup()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\utils\functional.py", line 382, in _setup
+    self._wrapped = self._setupfunc()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\middleware.py", line 23, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\middleware.py", line 11, in get_user
+    request._cached_user = auth.get_user(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\__init__.py", line 177, in get_user
+    user_id = _get_user_session_key(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\__init__.py", line 60, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\base.py", line 65, in __getitem__
+    return self._session[key]
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\base.py", line 238, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\db.py", line 43, in load
+    s = self._get_session_from_db()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 431, in get
+    num = len(clone)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 262, in __len__
+    self._fetch_all()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\sql\compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\sqlite3\base.py", line 423, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: django_session
+2021-07-09 10:32:43 [ERROR   ] (log.log_response) Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\base.py", line 233, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\sqlite3\base.py", line 423, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 20, in _wrapped_view
+    if test_func(request.user):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 44, in <lambda>
+    lambda u: u.is_authenticated,
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\utils\functional.py", line 246, in inner
+    self._setup()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\utils\functional.py", line 382, in _setup
+    self._wrapped = self._setupfunc()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\middleware.py", line 23, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\middleware.py", line 11, in get_user
+    request._cached_user = auth.get_user(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\__init__.py", line 177, in get_user
+    user_id = _get_user_session_key(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\__init__.py", line 60, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\base.py", line 65, in __getitem__
+    return self._session[key]
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\base.py", line 238, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\db.py", line 43, in load
+    s = self._get_session_from_db()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 431, in get
+    num = len(clone)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 262, in __len__
+    self._fetch_all()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\sql\compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\sqlite3\base.py", line 423, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: django_session
+2021-07-09 10:32:50 [ERROR   ] (log.log_response) Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\base.py", line 233, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\sqlite3\base.py", line 423, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 20, in _wrapped_view
+    if test_func(request.user):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 44, in <lambda>
+    lambda u: u.is_authenticated,
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\utils\functional.py", line 246, in inner
+    self._setup()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\utils\functional.py", line 382, in _setup
+    self._wrapped = self._setupfunc()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\middleware.py", line 23, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\middleware.py", line 11, in get_user
+    request._cached_user = auth.get_user(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\__init__.py", line 177, in get_user
+    user_id = _get_user_session_key(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\__init__.py", line 60, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\base.py", line 65, in __getitem__
+    return self._session[key]
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\base.py", line 238, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\db.py", line 43, in load
+    s = self._get_session_from_db()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 431, in get
+    num = len(clone)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 262, in __len__
+    self._fetch_all()
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\sql\compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\backends\sqlite3\base.py", line 423, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: django_session
+2021-07-09 10:46:01 [ERROR   ] (log.log_response) Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\org_manager\home\views.py", line 53, in index
+    total_savings = Expenditure.objects.filter(Q(approve_status = 1) & Q(expenditure_type__ne = "Savings")).aggregate(Sum('amount'))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 941, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 961, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\query.py", line 968, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\sql\query.py", line 1391, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\sql\query.py", line 1410, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\sql\query.py", line 1263, in build_filter
+    return self._add_q(
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\sql\query.py", line 1410, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\sql\query.py", line 1345, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\sql\query.py", line 1185, in build_lookup
+    lhs = self.try_transform(lhs, lookup_name)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\db\models\sql\query.py", line 1224, in try_transform
+    raise FieldError(
+django.core.exceptions.FieldError: Unsupported lookup 'ne' for CharField or join on the field not permitted.
+2021-10-03 22:46:06 [ERROR   ] (log.log_response) Internal Server Error: /accounting/earning
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 188, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 309, in check_response
+    raise ValueError(
+ValueError: The view accounting.views.other_earning didn't return an HttpResponse object. It returned None instead.
+2021-10-03 22:46:19 [ERROR   ] (log.log_response) Internal Server Error: /accounting/earning
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 188, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 309, in check_response
+    raise ValueError(
+ValueError: The view accounting.views.other_earning didn't return an HttpResponse object. It returned None instead.
+2021-10-03 22:47:22 [ERROR   ] (log.log_response) Internal Server Error: /accounting/expenditure
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 188, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 309, in check_response
+    raise ValueError(
+ValueError: The view accounting.views.expenditure_report didn't return an HttpResponse object. It returned None instead.
+2021-10-03 22:55:58 [ERROR   ] (log.log_response) Internal Server Error: /accounting/earning
+Traceback (most recent call last):
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 188, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\samrat\Desktop\Development\uttaran\uttaran new\env-uttaran-new\lib\site-packages\django\core\handlers\base.py", line 309, in check_response
+    raise ValueError(
+ValueError: The view accounting.views.other_earning didn't return an HttpResponse object. It returned None instead.

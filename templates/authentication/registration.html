@@ -1,0 +1,84 @@
+{% extends "layouts/base-fullscreen.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Register {% endblock %} 
+
+{% block stylesheets %}
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'vendor/toastr/toastr.min.css'%}">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="register-box ms-auto me-auto mt-5">
+    <div class="register-logo">
+      <a class="text-decoration-none" href=""><b>Uttaran</b></a>
+    </div>
+
+    <div class="card">
+      <div class="card-body register-card-body">
+
+        <form action="" method="post">
+          {% csrf_token %}
+          <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign Up</h1>
+          {{ form| crispy }}
+
+          <div class="row">
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </div>
+          </div>
+        </form>
+
+        <hr>
+
+        <a href="login" class="text-decoration-none">I already have a membership</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+    <script src="{% static 'vendor/jQuery/jquery-3.6.0.min.js' %}"></script>
+
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'vendor/toastr/toastr.min.css'%}">
+    <script src="{% static 'vendor/toastr/toastr.min.js'%}"></script>
+    {% if messages %}
+    {% for m in messages %}
+
+        <script>
+            $(document).ready(function() {
+                toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+                }
+            });
+        toastr.{{m.tags}}('{{m}}');
+
+        </script>
+    {% endfor %}
+
+    {% endif %}
+{% endblock javascripts %}

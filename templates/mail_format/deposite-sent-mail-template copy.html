@@ -1,0 +1,29 @@
+{% autoescape off %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+</head>
+
+<body style="background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;">
+    <!-- HIDDEN PREHEADER TEXT -->
+Hello {{member.get_full_name}},</br>
+
+<p>Your subscription for <b>{{month.subs_of}}</b> has been approved.</p>
+<p>Please find the attachment for your receipt</p>
+</br>
+<br>
+<br>
+<br>
+<br><br>
+Best Regards,
+Team Uttaran
+</body>
+
+</html>
+{% endautoescape %}

@@ -1,0 +1,312 @@
+{% extends "layouts/base.html" %}      
+{% load static %}
+{% block title %} Dashboard {% endblock title %}   
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'vendor/datatables/css/dataTables.bootstrap5.min.css' %}">
+
+{% endblock stylesheets %}   
+{% block content %}
+    <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-3 justify-content-between">
+                        <div class="col-md-6">
+                            <h1 class="m-0 text-dark">Dashboard</h1>
+                        </div>
+                        <div class="col-md-6 ">
+                            <div class="d-flex ms-auto me-0">
+                                <ul class="d-flex ms-auto me-0 navbar-nav mb-2 mb-lg-0">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-bell-fill"></i><span class="badge bg-danger ml-2">{{ pending_user_approval|add:pending_deposit|add:pending_earning|add:pending_expenditure|add:open_meeting }}</span>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                            {% if pending_user_approval != 0 %}
+                                            <li>
+                                                <a href="{% url 'view-member' %}" class="dropdown-item">
+                                                    Pending New Member <span class="badge bg-danger ml-2">{{pending_user_approval}}</span>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+
+                                            {% if pending_deposit != 0 %}
+                                            <li>
+                                                <a href="{% url 'accounts-dashboard' %}" class="dropdown-item">
+                                                    Pending Deposit <span class="badge bg-danger ml-2">{{pending_deposit}}</span>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+
+                                            {% if pending_earning != 0 %}
+                                            <li>
+                                                <a href="{% url 'accounts-dashboard' %}" class="dropdown-item">
+                                                    Pending Earning <span class="badge bg-danger ml-2">{{pending_earning}}</span>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                            
+                                            {% if pending_expenditure != 0 %}
+                                            <li>
+                                                <a href="{% url 'accounts-dashboard' %}" class="dropdown-item">
+                                                    Pending Expenditure <span class="badge bg-danger ml-2">{{pending_expenditure}}</span>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                            
+                                            {% if open_meeting != 0 %}
+                                            <li>
+                                                <a href="{% url 'meeting-home' %}" class="dropdown-item">
+                                                    Open Meeting <span class="badge bg-danger ml-2">{{open_meeting}}</span>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                            
+                                        </ul>
+                                    </li>
+                                </ul>                            
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-white">
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{user_count}}</h3>
+                            <p>Total Member</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-android-people"></i>
+                        </div>
+                        <a href="{% url 'view-member' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>&#2547; {{total_deposit_all.amount__sum}} </h3>
+
+                            <p>Total Deposit of Members</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="{% url 'other-earning' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>&#2547; {{total_earning_other.amount__sum}}</h3>
+
+                            <p>Total Other Earning </p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-android-add-circle"></i>
+                        </div>
+                        <a href="{% url 'other-earning' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-lightblue">
+                        <div class="inner">
+                            <h3>&#2547; {{total_earning_all.amount__sum}}</h3>
+
+                            <p>Total Earning </p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-podium"></i>
+                        </div>
+                        <a href="{% url 'other-earning' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>&#2547; {{total_expenditure_other_than_savings.amount__sum}}</h3>
+
+                            <p>Expenditure excluding Savings</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-close"></i>
+                        </div>
+                        <a href="{% url 'expenditure-report' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-secondary">
+                        <div class="inner">
+                            <h3>&#2547; {{total_savings.amount__sum}}</h3>
+
+                            <p>Total Savings</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-ios-cloud-upload"></i>
+                        </div>
+                        <a href="{% url 'expenditure-report' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-pink">
+                        <div class="inner">
+                            <h3>&#2547; {{total_expenditure.amount__sum}}</h3>
+
+                            <p>Total Expenditure</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-ios-minus"></i>
+                        </div>
+                        <a href="{% url 'expenditure-report' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>  
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-purple">
+                        <div class="inner">
+                            <h3>&#2547; {{liquid_cash_on_hand}}</h3>
+
+                            <p>Liquid Cash on hand</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-cash"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>   
+            <!--Chart Start--> 
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Charts
+                        </div>
+                        <div class="card-body">
+                            <canvas id="member-deposit-canvas" class="chart" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+            <!--Chart End-->
+            <!--Table Start-->
+            <div class="row">
+                <div class="col-lg-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Due Report of all Members</b></h5>
+                        </div>
+                        <div class="card-body">
+                            <table id="example3" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                      <td> Member's Name</td>
+                                      <td> Due Month</td>
+                          
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  {% for key, value in  new_dict.items %}
+                                    <td>{{key}}</td>
+                                    <td>{% for list1 in value %} {{list1}}, {% endfor %}</td>
+                                  </tbody>
+                                  {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!--Table End-->
+
+        <!--Start Announcement Modal-->
+                 
+          <div id="myModal" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                {% for announcement in announcements %}
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{announcement.announcement_subject}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{announcement.announcement}}</p>
+                    </div>
+                    
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+          <!--End Announcement Modal-->
+        {% endblock content %}
+        
+        {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'vendor/datatables/js/dataTables.bootstrap5.min.js' %}"></script>
+        <script>
+        var barChartCanvas = document.getElementById('member-deposit-canvas').getContext('2d')
+
+      var barChartOptions = {
+        responsive              : true,
+        maintainAspectRatio     : false,
+        datasetFill             : false
+      }
+
+      var barChart = new Chart(barChartCanvas, {
+        type: 'bar',
+        data: {
+          datasets: [{
+            backgroundColor: 'rgba(60,141,188,0.9)',
+            borderColor: 'rgba(60,141,188,0.8)',
+            pointRadius: false,
+            pointColor: '#3b8bba',
+            pointStrokeColor: 'rgba(60,141,188,1)',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(60,141,188,1)',
+            data: {{ member_deposit_data|safe }},
+            backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(255, 159, 64, 0.2)",
+                ],
+                borderColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)",
+                    "rgba(255, 159, 64, 1)",
+                ],
+                borderWidth: 1,
+            label: 'Total Deposit' 
+        }],
+        labels: {{ member_deposit_labels|safe }}
+      },
+        options: barChartOptions
+      })
+        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js"></script>
+        {% if announcements %} 
+        <script type="text/javascript">
+        $(document).ready(function() {
+            var date = new Date();
+            var minutes = 5;
+            date.setTime(date.getTime() + (minutes * 60 * 1000));
+            if ($.cookie('pop') == null) {
+                $('#myModal').modal('show');
+                $.cookie('pop', '1', { expires : date });
+            }
+        });
+        </script>
+        {% endif %}
+        {% endblock javascripts %}
+        

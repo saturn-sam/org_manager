@@ -1,0 +1,46 @@
+{% extends "layouts/base-fullscreen.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Login {% endblock %} 
+
+
+{% block stylesheets %}
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+{% endblock stylesheets %}
+{% block content %}
+  <div class="login-box ms-auto me-auto mt-5">
+    <div class="login-logo">
+      <a class="text-decoration-none" href=""><b>Uttaran</b></a>
+    </div>
+    <div class="card">
+      <div class="card-body register-card-body">
+        <form class="form-signin" action="" method="post" name="login_form">
+        {% csrf_token %}
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
+            {{ form| crispy }}
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% endif %}
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success">Sign in</button>
+              </div>
+            </div>            
+            <hr>
+        </form>        
+        <a class="ps-4 text-decoration-none" href="{% url 'forgotpass' %}">I forgot my password</a>
+        <a class="ps-4 pb-3 text-decoration-none" href="{% url 'registration' %}">I am new, want to register</a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  <script src="{% static 'vendor/jQuery/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+{% endblock javascripts %}

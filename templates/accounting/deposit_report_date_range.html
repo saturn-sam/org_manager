@@ -1,0 +1,130 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Deposit Report {% endblock %} 
+
+
+{% block stylesheets %}
+
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/dataTables.bootstrap5.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/responsive.bootstrap5.min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap-multiselect/css/BsMultiSelect.min.css' %}">
+
+  <!-- XDSoft DateTimePicker -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
+
+{% endblock stylesheets %}
+
+  
+
+{% block content %}
+
+<div class="content-wrapper">
+        <div class="row mt-3">
+                <div class="d-flex justify-content-center ">
+                    <div class="col-md-4 border p-3">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <fieldset class="form-group">
+                                <h3>Deposite Report on Submission Date</h3>
+                                <hr>
+                            
+                                {{ form_dr|crispy }}
+                                
+                            
+                            </fieldset>
+                            <div class="form-group justify-content-between">
+                                <input class="btn btn-success" type="submit" value="show" name="show">
+                                <input class="btn btn-success" type="submit" value="download" name="download">
+                            </div>
+                        </form>
+                    </div>                
+                </div>
+        </div>
+            {% if deposits %}
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">All Deposit Report {% if not request.user.is_staff %} of {{request.user.get_full_name}} {% endif %}</h3>
+                    </div>
+                    <div class="card-body">
+                        <table id="date_range_deposit_report" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Sl.</th>
+                                    <th>Member's Name</th>
+                                    <th>Subscription Month</th>
+                                    <th>Bank Ref. Number</th>
+                                    <th>Info. Submitted by</th>
+                                    <th>Submission Date</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for all_deposit in deposits %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{all_deposit.member_name.get_full_name}}</td>
+                                    <td>{{all_deposit.sub_of}}</td>
+                                    <td>{{all_deposit.bank_ref_num}}</td>
+                                    <td>{{all_deposit.insert_by.get_full_name}}</td>
+                                    <td>{{all_deposit.insert_date}}</td>
+                                    <td>{{all_deposit.amount}}</td>
+                                </tr>
+                            {% endfor %}
+                            <tr class="border-bottom-0">
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border-0 border-bottom-0"></td>
+                                <td class="border"><b>Total</b></td>
+                                <td class="border"><b>{{sum_amount.amount__sum}}</b></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+            {% endif %}
+     
+
+</div>
+
+{% endblock content %}
+
+
+{% block javascripts %}
+
+
+<!-- XDSoft DateTimePicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/responsive.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+
+
+  <script>
+    $(function () {
+      $("#id_start_date").datetimepicker({
+      format: 'd/m/Y',timepicker:false,mask:true,
+    });
+      $("#id_end_date").datetimepicker({
+      format: 'd/m/Y',timepicker:false,mask:true
+    });    
+    });
+  </script>
+
+{% endblock javascripts %}

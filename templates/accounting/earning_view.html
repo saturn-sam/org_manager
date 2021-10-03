@@ -1,0 +1,89 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Earning Entry by {% if request.user.get_full_name %} {{request.user.get_full_name}} {% else %} {{request.user.email}} {% endif %} {% endblock %} 
+
+
+{% block stylesheets %}
+
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/dataTables.bootstrap5.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/responsive.bootstrap5.min.css' %}">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content-wrapper">
+      <div class="row mt-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">All Earning Entry by {% if request.user.get_full_name %} {{request.user.get_full_name}} {% else %} {{request.user.email}} {% endif %}</h5>
+                </div>
+                <div class="card-body">
+                  <table id="earning-table-view" class="table table-bordered table-hover">
+                      <thead>
+                          <tr>
+                              <th>Status</th>
+                              <th>Earning Source</th>
+                              <th>description</th>
+                              <th>Amount</th>
+                              <th>Document</th>
+                              <th>Submitted By</th>
+                              <th>Submission Date</th>
+                              <th>Approve/Deny By</th>
+                              <th>Approve/Deny Date</th>
+                              
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for all_earning in all_earnings %}
+                              <tr>
+                                  <td>{% if all_earning.approve_status == 0 %}
+                                  <span class="badge bg-warning">Pending</span> 
+                                  {% elif all_earning.approve_status == 1 %}
+                                    <span class="badge bg-success">Approved</span>
+                                  {% else %}
+                                    <span class="badge bg-danger">Denied</span>
+                                  {% endif %} </td>
+                                  <td>{{all_earning.earning_source}}</td>
+                                  <td>{{all_earning.description}}</td>
+                                  <td>{{all_earning.amount}}</td>
+                                  <td>
+                                  {% if all_earning.document_image %}
+                                    <a href="{{all_earning.document_image.url}}"> Show</a>
+
+                                  {% endif %}
+                                  </td>
+                                  
+                                  <td>{{all_earning.insert_by.get_full_name}}</td>
+                                  <td>{{all_earning.insert_date}}</td>
+                                  <td>{% if all_earning.approve_status != 0 %}
+                                    {{all_earning.approve_by.get_full_name}}
+                                  {% endif %} </td>
+                                  <td>{% if all_earning.approve_status != 0 %}
+                                    {{all_earning.approve_date}}
+                                  {% endif %} </td>
+                              </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/responsive.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+
+
+
+{% endblock javascripts %}

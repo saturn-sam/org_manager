@@ -1,0 +1,215 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} All Member {% endblock %} 
+
+{% block stylesheets %}
+
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/dataTables.bootstrap5.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/responsive.bootstrap5.min.css' %}">
+
+
+{% endblock stylesheets %}
+
+  
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-10 pt-10">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">All Member</h3>
+                </div>
+                <div class="card-body">
+                    <table id="all-member" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Phone No.</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Role</th>
+                                {% if request.user.is_staff %}
+                                  <th>View Profile</th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for member in all_members %}
+                                <tr>
+                                    <td>{{member.id}}</td>
+                                    <td>{{member.get_full_name}}</td>
+                                    <td>
+                                        {% if member.profile.phone != "NULL" %}
+                                          {{member.profile.phone}}
+                                        {% else %}
+                                        
+                                        {% endif %}
+                                    </td>
+                                    <td>{{member.email}}</td>
+                                    <td class="user-enable-disable-{{member.id}}">{% if member.is_active %}
+                                        Enabled {% if request.user.is_staff %}
+                                                  <button type="button" class="btn btn-danger btn-sm" id="disable-user-btn" data-id="{{member.id}}" data-bs-toggle="modal" data-bs-target="#disable-user">Disable User</button>
+                                                {% endif %} 
+                                    {% else %}
+                                        Disabled {% if request.user.is_staff %}
+                                                    <button type="button" class="btn btn-success btn-sm" id="enable-user-btn" data-id="{{member.id}}" data-bs-toggle="modal" data-bs-target="#enable-user">Enable User</button>
+                                                  {% endif %}
+                                    {% endif %}</td>
+                                    <td class="admin-enable-disable-{{member.id}}">{% if member.is_staff %}
+                                        Admin {% if request.user.is_staff %}
+                                                <button type="button" class="btn btn-success btn-sm" id="member-user-btn" data-id="{{member.id}}" data-bs-toggle="modal" data-bs-target="#member-user">Make User</button>
+                                              {% endif %}
+                                    {% else %}
+                                        Member  {% if request.user.is_staff %}
+                                                  <button type="button" class="btn btn-danger btn-sm" id="admin-user-btn" data-id="{{member.id}}" data-bs-toggle="modal" data-bs-target="#admin-user">Make Admin</button>
+                                                {% endif %}
+                                    {% endif %}</td>
+                                    {% if request.user.is_staff %}
+                                      <td><a href="{% url 'view-user-profile' member.id %}">View</a></td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal for Disable User Start -->
+<div class="modal fade" id="disable-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Disable User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to disable this user?
+      </div>
+      <div class="modal-footer">
+        <form method=POST>
+          {% csrf_token %}
+          <input type="hidden" id="disable-user-id-container">
+
+          <div id="user-disable-buttons">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">No, Back</button>
+            <button type="button" class="btn btn-success disable-user-submit">Yes, Disable</button>
+          </div>
+          
+          <div id="user-disable-loader" style="display:none;">
+            <img src="{% static 'image/loader.gif' %}" alt="loading">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Disable User End -->
+<!-- Modal for Enable User Start -->
+<div class="modal fade" id="enable-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enable User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to enable this user?
+      </div>
+      <div class="modal-footer">
+        <form method=POST>
+          {% csrf_token %}
+          <input type="hidden" id="enable-user-id-container">
+
+          <div id="user-enable-buttons">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">No, Back</button>
+            <button type="button" class="btn btn-success enable-user-submit">Yes, Enable</button>
+          </div>
+          
+          <div id="user-enable-loader" style="display:none;">
+            <img src="{% static 'image/loader.gif' %}" alt="loading">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Enable User End -->
+
+<!-- Modal for Enable Ordinary Start -->
+<div class="modal fade" id="member-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Make Ordinary Member</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to make this user an ordinary member? 
+      </div>
+      <div class="modal-footer">
+        <form method=POST>
+          {% csrf_token %}
+          <input type="hidden" id="member-user-id-container">
+
+          <div id="user-buttons">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">No, Back</button>
+            <button type="button" class="btn btn-success member-user-submit">Yes, Confirm</button>
+          </div>
+          
+          <div id="user-loader" style="display:none;">
+            <img src="{% static 'image/loader.gif' %}" alt="loading">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Make ordinary User End -->
+<!-- Modal for Admin Member Start -->
+<div class="modal fade" id="admin-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Make Admin Member</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to make this user an admin? 
+      </div>
+      <div class="modal-footer">
+        <form method=POST>
+          {% csrf_token %}
+          <input type="hidden" id="admin-user-id-container">
+
+          <div id="admin-buttons">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">No, Back</button>
+            <button type="button" class="btn btn-success admin-user-submit">Yes, Confirm</button>
+          </div>
+          
+          <div id="admin-loader" style="display:none;">
+            <img src="{% static 'image/loader.gif' %}" alt="loading">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Admin Member End -->
+
+{% endblock content %}
+
+{% block javascripts %}
+
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/responsive.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+
+{% endblock javascripts %}

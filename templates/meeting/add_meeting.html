@@ -1,0 +1,60 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Add Meeting {% endblock %} 
+
+{% block stylesheets %}
+
+
+{% endblock stylesheets %}
+
+  
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="hidden-class">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'meeting-home' %}">Meeting Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'meeting-add' %}">Add Meeting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'agenda-add' %}">Add Meeting Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'attendance' %}">Attendance</a>
+                    </li>                            
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-6  ms-auto me-auto">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group mt-3">
+                    <h5>Create Meeting</h5>
+                    <hr>
+                    {{m_form|crispy}}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-success btn-block" type="submit">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+{% endblock javascripts %}

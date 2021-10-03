@@ -1,0 +1,412 @@
+    <div class="offcanvas offcanvas-start sidebar-nav bg-dark text-white-50" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+
+        <div class="offcanvas-body p-0">
+            <div class="navbar-dark">
+                <ul class="navbar-nav">
+                    <li>
+                        <a href="#" class="nav-link px-3 active">
+                            <span class="me-2">
+                                <img src="{{user.profile.image.url}}" class="img-sidebar"  alt="User Image">
+                            </span>
+                            <span>
+                                {% if user.get_full_name %}
+                                    {{ user.get_full_name }}
+                                {% else %}
+                                    {{ user.email}}
+                                {% endif %}
+                                
+                            </span>
+                        </a>
+                    </li>
+                    <li class="my-4">
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">
+                            <span class="me-2">
+                                <i class="bi bi-house-fill"></i>
+                            </span>
+                            <span>
+                                Home
+                            </span>
+                            <span class="right-icon ms-auto">
+                                <i class="bi bi-chevron-down"></i>
+                            </span>
+                        </a>
+                        <div class="collapse" id="collapse1">
+                            <div>
+                                <ul class="navbar-nav ps-3">
+                                    <li>
+                                        <a href="{% url 'home' %}" class="nav-link px-3 active">
+                                            <span class="me-2">
+                                                <i class="bi bi-speedometer2"></i>
+                                            </span>
+                                            <span>
+                                                Dashboard
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapse2">
+                            <span class="me-2">
+                                <i class="bi bi-bank"></i>
+                            </span>
+                            <span>
+                                Accounts
+                            </span>
+                            <span class="right-icon ms-auto">
+                                <i class="bi bi-chevron-down"></i>
+                            </span>
+                        </a>
+                        <div class="collapse" id="collapse2">
+                            <div>
+                                <ul class="navbar-nav ps-3">
+                                    <li>
+                                        <a href="{% url 'accounts-dashboard' %}" class="nav-link px-3">
+                                            <span class="me-2">
+                                                <i class="fas fa-money-check-alt"></i>
+                                            </span>
+                                            <span>
+                                                Accounts Dashboard
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#deposit" role="button" aria-expanded="false" aria-controls="deposit">
+                                            <span class="me-2">
+                                                <i class="fal fa-lightbulb-dollar"></i>
+                                            </span>
+                                            <span>
+                                                Deposit Info.
+                                            </span>
+                                            <span class="right-icon ms-auto">
+                                                <i class="bi bi-chevron-down"></i>
+                                            </span>
+                                        </a>
+                                        <div class="collapse" id="deposit">
+                                            <div>
+                                                <ul class="navbar-nav ps-3">
+                                                    <li>
+                                                        <a href="{% url 'deposit-submit' %}" class="nav-link px-3">
+                                                            <span class="me-2">
+                                                                <i class="fal fa-money-check-edit"></i>
+                                                            </span>
+                                                            <span>
+                                                                Insert
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{% url 'deposit-view' %}" class="nav-link px-3">
+                                                            <span class="me-2">
+                                                                <i class="far fa-eye"></i>
+                                                            </span>
+                                                            <span>
+                                                                View
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#earning" role="button" aria-expanded="false" aria-controls="earning">
+                                            <span class="me-2">
+                                                <i class="far fa-sack-dollar"></i>
+                                            </span>
+                                            <span>
+                                                Earning Info.
+                                            </span>
+                                            <span class="right-icon ms-auto">
+                                                <i class="bi bi-chevron-down"></i>
+                                            </span>
+                                        </a>
+                                        <div class="collapse" id="earning">
+                                            <div>
+                                                <ul class="navbar-nav ps-3">
+                                                    <li>
+                                                        <a href="{% url 'earning-submit' %}" class="nav-link px-3">
+                                                            <span class="me-2">
+                                                                <i class="fal fa-money-check-edit"></i>
+                                                            </span>
+                                                            <span>
+                                                                Insert
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{% url 'earning-view' %}" class="nav-link px-3">
+                                                            <span class="me-2">
+                                                                <i class="far fa-eye"></i>
+                                                            </span>
+                                                            <span>
+                                                                View
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#expenditure" role="button" aria-expanded="false" aria-controls="expenditure">
+                                            <span class="me-2">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </span>
+                                            <span>
+                                                Expenditure Info.
+                                            </span>
+                                            <span class="right-icon ms-auto">
+                                                <i class="bi bi-chevron-down"></i>
+                                            </span>
+                                        </a>
+                                        <div class="collapse" id="expenditure">
+                                            <div>
+                                                <ul class="navbar-nav ps-3">
+                                                    <li>
+                                                        <a href="{% url 'expenditure-submit' %}" class="nav-link px-3">
+                                                            <span class="me-2">
+                                                                <i class="fal fa-money-check-edit"></i>
+                                                            </span>
+                                                            <span>
+                                                                Insert
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{% url 'expenditure-view' %}" class="nav-link px-3">
+                                                            <span class="me-2">
+                                                                <i class="far fa-eye"></i>
+                                                            </span>
+                                                            <span>
+                                                                View
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#collapse3" role="button" aria-expanded="false" aria-controls="collapse3">
+                            <span class="me-2">
+                                <i class="far fa-handshake"></i>
+                            </span>
+                            <span>
+                                Meeting
+                            </span>
+                            <span class="right-icon ms-auto">
+                                <i class="bi bi-chevron-down"></i>
+                            </span>
+                        </a>
+                        <div class="collapse" id="collapse3">
+                            <div>
+                                <ul class="navbar-nav ps-3">
+                                    <li>
+                                        <a href="{% url 'meeting-home' %}" class="nav-link px-3">
+                                            <span class="me-2">
+                                                <i class="bi bi-person-badge"></i>
+                                            </span>
+                                            <span>
+                                                Meeting Home
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'meeting-add' %}" class="nav-link px-3">
+                                            <span class="me-2">
+                                                <i class="fas fa-calendar-plus"></i>
+                                            </span>
+                                            <span>
+                                                Add Meeting
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'agenda-add' %}" class="nav-link px-3">
+                                            <span class="me-2">
+                                                <i class="far fa-comment-alt-plus"></i>
+                                            </span>
+                                            <span>
+                                                Add Meeting Agenda
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'attendance' %}" class="nav-link px-3">
+                                            <span class="me-2">
+                                                <i class="fad fa-users-class"></i>
+                                            </span>
+                                            <span>
+                                                Meeting Attendance
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#collapse4" role="button" aria-expanded="false" aria-controls="collapse4">
+                            <span class="me-2">
+                                <i class="fad fa-user-crown"></i>
+                            </span>
+                            <span>
+                                Admin Section
+                            </span>
+                            <span class="right-icon ms-auto">
+                                <i class="bi bi-chevron-down"></i>
+                            </span>
+                        </a>
+                        <div class="collapse" id="collapse4">
+                            <div>
+                                <ul class="navbar-nav ps-3">
+                                    <li>
+                                        <a href="{% url 'view-member' %}" class="nav-link px-3">
+                                            <span class="me-2">
+                                                <i class="fas fa-users"></i>
+                                            </span>
+                                            <span>
+                                                User Management
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'add-subscription' %}" class="nav-link px-3">
+                                            <span class="me-2">
+                                                <i class="fas fa-hourglass"></i>
+                                            </span>
+                                            <span>
+                                                Add Subscription
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#id_announcement" role="button" aria-expanded="false" aria-controls="id_announcement">
+                                            <span class="me-2">
+                                                <i class="fad fa-bullhorn"></i>
+                                            </span>
+                                            <span>
+                                                Announcement
+                                            </span>
+                                            <span class="right-icon ms-auto">
+                                                <i class="bi bi-chevron-down"></i>
+                                            </span>
+                                        </a>
+                                        <div class="collapse" id="id_announcement">
+                                            <ul class="navbar-nav ps-3">
+                                                <li>
+                                                    <a href="{% url 'add-announcement' %}" class="nav-link px-3">
+                                                        <span class="me-2">
+                                                            <i class="fal fa-comment-alt-plus"></i>
+                                                        </span>
+                                                        <span>
+                                                            Add
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'view-announcement' %}" class="nav-link px-3">
+                                                        <span class="me-2">
+                                                            <i class="fal fa-scroll"></i>
+                                                        </span>
+                                                        <span>
+                                                            View
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#collapse5" role="button" aria-expanded="false" aria-controls="collapse5">
+                            <span class="me-2">
+                                <i class="fas fa-file-chart-pie"></i>
+                            </span>
+                            <span>
+                                Reports
+                            </span>
+                            <span class="right-icon ms-auto">
+                                <i class="bi bi-chevron-down"></i>
+                            </span>
+                        </a>
+                        <div class="collapse" id="collapse5">
+                            <div>
+                                <ul class="navbar-nav ps-3">
+                                    <li>
+                                        <a href="{% url 'deposit-report' %}" class="nav-link px-3">
+                                            <span class="me-2">
+                                                <i class="bi bi-person-badge"></i>
+                                            </span>
+                                            <span>
+                                                View Diposits (Date-wise)
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'deposit-report2' %}" class="nav-link px-3">
+                                            <span class="me-2">
+                                                <i class="fas fa-calendar-plus"></i>
+                                            </span>
+                                            <span>
+                                                View Diposits (Member-wise)
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'other-earning' %}" class="nav-link px-3">
+                                            <span class="me-2">
+                                                <i class="fas fa-calendar-plus"></i>
+                                            </span>
+                                            <span>
+                                                Earning Report
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'expenditure-report' %}" class="nav-link px-3">
+                                            <span class="me-2">
+                                                <i class="fas fa-calendar-plus"></i>
+                                            </span>
+                                            <span>
+                                                Expenditure Report
+                                            </span>
+                                        </a>
+                                    </li> 
+                                    <li>
+                                        <a href="{% url 'due-report' %}" class="nav-link px-3">
+                                            <span class="me-2">
+                                                <i class="fas fa-calendar-plus"></i>
+                                            </span>
+                                            <span>
+                                                Due Report
+                                            </span>
+                                        </a>
+                                    </li>                                                                      
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>

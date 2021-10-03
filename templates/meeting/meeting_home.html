@@ -1,0 +1,96 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Meeting Home {% endblock %} 
+
+{% block stylesheets %}
+
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/dataTables.bootstrap5.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/responsive.bootstrap5.min.css' %}">
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="hidden-class">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'meeting-home' %}">Meeting Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'meeting-add' %}">Add Meeting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'agenda-add' %}">Add Meeting Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'attendance' %}">Attendance</a>
+                    </li>                            
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-12 ms-auto me-auto">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="card-title">Meeting Home</b></h5>
+                </div>
+                <div class="card-body">
+                    <table id="meeting-home-table" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Meeting Number</th>
+                                <th>Date</th>
+                                <th>Meeting Chair</th>
+                                <th>Meeting Type</th>
+                                <th>minutes Taker</th>
+                                <th>View Attendee</th>
+                                <th>View Agenda</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for all_meeting in all_meetings %}
+                                <tr>
+                                    <td>{% if all_meeting.final_approval != 0 %}
+                                        <span class="badge bg-success">Closed</span>
+
+                                        {% else %}
+                                        <span class="badge bg-danger">Open</span>
+                                            {% if all_meeting.chair == request.user %}
+                                                <a class="btn btn-success btn-sm" href="{% url 'close-meeting' all_meeting.number %}">Close</a>
+                                            {% endif %}                                                    
+                                        {% endif %}</td>
+                                    <td><a href="{% url 'view-meeting' all_meeting.number%}">{{all_meeting.number}}</a></td>
+                                    <td>{{all_meeting.date}}</td>
+                                    <td>{{all_meeting.chair.get_full_name}}</td>
+                                    <td>{{all_meeting.mtype}}</td>
+                                    <td>{{all_meeting.minute_taker.get_full_name}}</td>
+                                    <td><a href="{% url 'view-attendee' all_meeting.number%}">View</a></td>
+                                    <td><a href="{% url 'view-agenda' all_meeting.number%}">view</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/responsive.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+
+{% endblock javascripts %}

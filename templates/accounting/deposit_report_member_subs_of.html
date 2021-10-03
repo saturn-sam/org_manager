@@ -1,0 +1,146 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Deposit Report {% endblock %} 
+
+{% block stylesheets %}
+
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/dataTables.bootstrap5.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/responsive.bootstrap5.min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap-multiselect/css/BsMultiSelect.min.css' %}">
+
+
+{% endblock stylesheets %}
+
+  
+
+{% block content %}
+
+<div class="content-wrapper">
+    <div class="row mt-3">
+        <div class="d-flex justify-content-center ">
+            <div class="col-md-4 border p-3">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <h3>Deposite Report on Submission Date</h3>
+                        <hr>
+                        <div class="">
+                            <strong>Select Member:</strong>
+                            <select name="member" id="multiple-checkboxes" multiple="multiple">
+                                <option value="all">All</option>
+                            {% for member in members %}
+                                <option value="{{member.id}}">{{member.get_full_name}}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="">
+                            <strong>Select Subscription:</strong>
+                            <select name="subs" id="multiple-checkboxes2" multiple="multiple">
+                                <option value="all">All</option>
+                            {% for sub in subs %}
+                                <option value="{{sub.id}}">{{sub.subs_of}}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                        
+                    
+                    </fieldset></br>
+                    <div class="form-group justify-content-between">
+                        <input class="btn btn-success" type="submit" value="show" name="show">
+                        <input class="btn btn-success" type="submit" value="download" name="download">
+                    </div>
+                </form>
+            </div>                
+        </div>
+        {% if deposits %}
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">All Deposit Report {% if not request.user.is_staff %} of {{request.user.get_full_name}} {% endif %}</h3>
+                    </div>
+                    <div class="card-body">
+                        <table id="member_wise_deposit_report" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Sl.</th>
+                                    <th>Member's Name</th>
+                                    <th>Subscription Month</th>
+                                    
+                                    <th>Bank Ref. Number</th>
+                                    <th>Info. Submitted by</th>
+                                    <th>Submission Date</th>
+                                    <th>Amount</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for all_deposit in deposits %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{all_deposit.member_name.get_full_name}}</td>
+                                    <td>{{all_deposit.sub_of}}</td>  
+                                    <td>{{all_deposit.bank_ref_num}}</td>
+                                    <td>{{all_deposit.insert_by.get_full_name}}</td>
+                                    <td>{{all_deposit.insert_date}}</td>
+                                    <td>{{all_deposit.amount}}.00</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tbody>
+                                <tr class="border-bottom-0">
+                                {% for sum_amounts in sum_amount %}
+                                    <td class="border-0 border-bottom-0"></td>
+                                    <td class="border-0 border-bottom-0"></td>
+                                    <td class="border-0 border-bottom-0"></td>
+                                    <td class="border-0 border-bottom-0"></td>
+                                    <td class="border-0 border-bottom-0"></td>
+                                    <td class="border">Total Amount</td>
+                                    
+                                    <td class="border">{{sum_amounts.sum_a}}.00</td>
+                                {% endfor %}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block javascripts %}
+
+    <script src="{% static 'vendor/jQuery/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'vendor/popper/popper.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap-multiselect/js/BsMultiSelect.min.js' %}"></script>
+    
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/responsive.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+
+
+
+<script>
+$(document).ready(function() {
+    $('#multiple-checkboxes').bsMultiSelect({
+    });
+    $('#multiple-checkboxes2').bsMultiSelect({
+    });
+});
+</script>
+
+
+
+{% endblock javascripts %}

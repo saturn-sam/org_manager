@@ -1,0 +1,486 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Accounts Dashboard {% endblock %} 
+
+
+{% block stylesheets %}
+
+
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/dataTables.bootstrap5.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/datatables/css/responsive.bootstrap5.min.css' %}">
+
+{% endblock stylesheets %}
+
+{% block content %} 
+
+  <div class="content-wrapper">
+      <section class="content-header">
+          <div class="container-fluid">
+              <div class="row mb-2">
+                  <div class="col-sm-12">
+                      <h2>Accounts Records at a glance</h2>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <div class="row">
+          <div class="col-lg-5 col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <h5 class="card-title">Monthwise Report of <b>{{request.user.get_full_name}}</b></h5>
+                  </div>
+                  <div class="card-body">
+                      <table id="example3" class="table table-bordered table-hover">
+                          <thead>
+                              <tr>
+                                  <th>Subscription Month</th>
+                                  <th>Deposit Status</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            {% for month_wise_deposits in month_wise_deposit %}
+                                <tr>
+                                    <td>{{month_wise_deposits.subs_of}}</td>
+                                    <td>{% if month_wise_deposits.deposite_user__member_name__first_name != NULL %}
+                                            <span class="badge bg-success">Subscription Deposited</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Subscription Due</span>
+                                        {% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-lg-5 col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <h5 class="card-title">Accounts Summary of <b>{{request.user.get_full_name}}</b></h5>
+                  </div>
+                  <div class="card-body">
+                      <p>Total Deposit = {% if total_deposit_individual.amount__sum == none %}
+                        0
+                        {% else %}
+                        {{total_deposit_individual.amount__sum}}
+                      {% endif %} Taka</p> 
+                      <p {% if due_counter > 0 %}style="color:red"{% endif %} >Total Due = {{due_counter}} Month(s)</p> 
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="row mt-3">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <h5 class="card-title">All Deposit Report</h5>
+                  </div>
+                  <div class="card-body">
+                      <table id="deposite-view-table" class="table table-bordered table-hover">
+                          <thead>
+                              <tr>
+                                  <th>Status</th>
+                                  <th>Member's Name</th>
+                                  <th>Subscription Month</th>
+                                  <th>Amount</th>
+                                  <th>Document</th>
+                                  <th>Bank Ref. Number</th>
+                                  <th>Info. Submitted by</th>
+                                  <th>Submission Date</th>
+                                  
+                                  {% if request.user.is_staff %}
+                                    <th>Approve</th> 
+                                  {% endif %}
+
+                                  <th>Approve/ Deny Date</th>
+                                  <th>Approve/ Deny by</th>
+                                  <th>Download Receipt</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                          {% for all_deposit in all_deposits %}
+                              <tr>
+                                  <td class="deposit-status-{{all_deposit.id}}">{% if all_deposit.approve_status == 0 %}
+                                    <span class="badge bg-warning">Pending</span>
+                                  {% elif all_deposit.approve_status == 1 %}
+                                    <span class="badge bg-success">Approved</span>
+                                  {% else %}
+                                    <span class="badge bg-danger">Denied</span>
+                                  {% endif %} </td>
+                                  <td>{{all_deposit.member_name.get_full_name}}</td>
+                                  <td>{{all_deposit.sub_of}}</td>
+                                  <td>{{all_deposit.amount}}</td>
+                                  <td><a href="{{all_deposit.recipt_image.url}}">View</a></td>
+                                  <td>{{all_deposit.bank_ref_num}}</td>
+                                  <td>{{all_deposit.insert_by.get_full_name}}</td>
+                                  <td>{{all_deposit.insert_date}}</td>
+
+                                  {% if request.user.is_staff  %}
+                                    <td class="approve-deny-{{all_deposit.id}}">
+                                    {% if all_deposit.approve_status == 0 and request.user != all_deposit.insert_by  %}
+                                      <button type="button" class="btn btn-success" id="deposit-approve-btn" data-id="{{all_deposit.id}}" data-bs-toggle="modal" data-bs-target="#deposit-approve">
+                                        <small>
+                                          <i class="fas fa-check"></i>
+                                        </small>
+                                      </button>
+                                      <button type="button" class="btn btn-danger" id="deposit-deny-btn" data-id="{{all_deposit.id}}" data-bs-toggle="modal" data-bs-target="#deposit-deny">
+                                        <small>
+                                          <i class="fas fa-times"></i>
+                                        </small>
+                                      </button>
+                                    {% endif %}
+                                    </td>
+                                  {% endif %}
+                                  <td>{% if all_deposit.approve_status != 0 %}
+                                    {{all_deposit.appove_date}}
+                                  {% endif %} </td>
+                                  <td>{% if all_deposit.approve_status != 0 %}
+                                    {% if all_deposit.approve_by.get_full_name %}
+                                      {{all_deposit.approve_by.get_full_name}}
+                                    {% else %}
+                                      {{all_deposit.approve_by.email}}
+                                    {% endif %}
+                                    
+                                  {% endif %} </td>
+                                  <td>{% if request.user == all_deposit.member_name and all_deposit.approve_status == 1 %}
+                                    <a class="btn btn-info" href="../media/pdfs/Receipt_{{all_deposit.sub_of}}_{{all_deposit.member_name.email}}.pdf">Download</a>
+                                  {% endif %}  </td>                                
+                              </tr>
+                          {% endfor %}
+                          </tbody>
+
+                      </table>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row mt-3">
+          <div class="col-lg-12 col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <h5 class="card-title">All Earning Report</b></h3>
+                  </div>
+                  <div class="card-body">
+                      <table id="earning-table-view" class="table table-bordered table-hover">
+                          <thead>
+                              <tr>
+                                  <th>Status</th>
+                                  <th>Earning Source</th>
+                                  <th>description</th>
+                                  <th>Amount</th>
+                                  <th>Document</th>
+                                  <th>Submitted By</th>
+                                  <th>Submission Date</th>
+                                  {% if request.user.is_staff %}
+                                    <th>Approve</th> 
+                                  {% endif %}
+                                  <th>Approve/ Deny By</th>
+                                  <th>Approve/ Deny Date</th>
+                                  
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {% for all_earning in all_earnings %}
+                                  <tr>
+                                      <td>{% if all_earning.approve_status == 0 %}
+                                      <span class="badge bg-warning">Pending</span> 
+                                      {% elif all_earning.approve_status == 1 %}
+                                        <span class="badge bg-success">Approved</span>
+                                      {% else %}
+                                        <span class="badge bg-danger">Denied</span>
+                                      {% endif %} </td>
+                                      <td>{{all_earning.earning_source}}</td>
+                                      <td>{{all_earning.description}}</td>
+                                      <td>{{all_earning.amount}}</td>
+                                      <td>
+                                      {% if all_earning.document_image %}
+                                        <a href="{{all_earning.document_image.url}}"> Show</a>
+
+                                      {% endif %}
+                                      </td>
+                                      
+                                      <td>{{all_earning.insert_by.get_full_name}}</td>
+                                      <td>{{all_earning.insert_date}}</td>
+                                      
+                                      {% if request.user.is_staff %}
+
+                                        <td class="earning-approve-deny-{{all_earning.id}}">
+                                        {% if all_earning.approve_status == 0 and all_earning.insert_by != request.user  %}
+                                          <button type="button" class="btn btn-success" id="earning-approve-btn" data-id="{{all_earning.id}}" data-bs-toggle="modal" data-bs-target="#earning-approve">
+                                            <small>
+                                              <i class="fas fa-check"></i>
+                                            </small>
+                                          </button>
+                                          <button type="button" class="btn btn-danger" id="earning-deny-btn" data-id="{{all_earning.id}}" data-bs-toggle="modal" data-bs-target="#earning-deny">
+                                            <small>
+                                              <i class="fas fa-times"></i>
+                                            </small>
+                                          </button>
+                                        {% endif %}
+                                        </td>
+
+                                      {% endif %}
+                                      <td>{% if all_earning.approve_status != 0 %}
+                                        {% if all_earning.approve_by.get_full_name %}
+                                          {{all_earning.approve_by.get_full_name}}
+                                        {% else %}
+                                          {{all_earning.approve_by.email}}
+                                        {% endif %} 
+                                      {% endif %} </td>
+                                      <td>{% if all_earning.approve_status != 0 %}
+                                        {{all_earning.approve_date}}
+                                      {% endif %} </td>
+                                  </tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="row mt-3">
+          <div class="col-lg-12 col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <h5 class="card-title">All Expenditure Report</b></h3>
+                  </div>
+                  <div class="card-body">
+                      <table id="expenditure-view-table" class="table table-bordered table-hover">
+                          <thead>
+                              <tr>
+                                  <th>Status</th>
+                                  <th>Expenditure Source</th>
+                                  <th>description</th>
+                                  <th>Amount</th>
+                                  <th>Document</th>
+                                  <th>Submitted By</th>
+                                  <th>Expenditure Date</th>
+                                  {% if request.user.is_staff %}
+                                    <th>Approve</th> 
+                                  {% endif %}
+                                  <th>Approve/Deny By</th>
+                                  <th>Approve/Deny Date</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {% for all_expenditure in all_expenditures %}
+                                  <tr>
+                                      <td>{% if all_expenditure.approve_status == 0 %}
+                                      <span class="badge bg-warning">Pending</span> 
+                                      {% elif all_expenditure.approve_status == 1 %}
+                                        <span class="badge bg-success">Approved</span>
+                                      {% else %}
+                                        <span class="badge bg-danger">Denied</span>
+                                      {% endif %} </td>
+                                      <td>{{all_expenditure.expenditure_source}}</td>
+                                      <td>{{all_expenditure.description}}</td>
+                                      <td>{{all_expenditure.amount}}</td>
+                                      <td>
+                                      {% if all_expenditure.supporting_document %}
+                                        <a href="{{all_expenditure.supporting_document.url}}"> Show</a>
+                                      {% endif %}
+                                      </td>
+                                      <td>{{all_expenditure.insert_by.get_full_name}}</td>
+                                      <td>{{all_expenditure.expenditure_date}}</td>
+                                      
+                                      {% if request.user.is_staff %}
+
+                                        <td class="expenditure-approve-deny-{{all_expenditure.id}}">
+                                        {% if all_expenditure.approve_status == 0 and all_expenditure.insert_by != request.user  %}
+                                          <button type="button" class="btn btn-success" id="expenditure-approve-btn" data-id="{{all_expenditure.id}}" data-bs-toggle="modal" data-bs-target="#expenditure-approve">
+                                            <small>
+                                              <i class="fas fa-check"></i>
+                                            </small>
+                                          </button>
+                                          <button type="button" class="btn btn-danger" id="expenditure-deny-btn" data-id="{{all_expenditure.id}}" data-bs-toggle="modal" data-bs-target="#expenditure-deny">
+                                            <small>
+                                              <i class="fas fa-times"></i>
+                                            </small>
+                                          </button>
+                                        {% endif %}
+                                        </td>
+                                      {% endif %}
+                                      <td>{% if all_expenditure.approve_status != 0 %}
+                                      {% if all_expenditure.approve_by.get_full_name %}
+                                        {{all_expenditure.approve_by.get_full_name}}
+                                      {% else %}
+                                      {{all_expenditure.approve_by.email}}
+                                      {% endif %}
+                                        
+                                      {% endif %} </td>
+                                      <td>{% if all_expenditure.approve_status != 0 %}
+                                        {{all_expenditure.approve_date}}
+                                      {% endif %} </td>
+                                  </tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+<!-- Modal for Deposit Approve Start -->
+<div class="modal fade" id="deposit-approve" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Approve Deposit Submission</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to approve the deposit submission?
+      </div>
+      <div class="modal-footer">
+        <form method=POST>
+          {% csrf_token %}
+          <input type="hidden" id="deposit-approve-id-container">
+
+          <div id="deposit-buttons">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">No, Back</button>
+            <button type="button" class="btn btn-success approve-deposit">Yes, Approve</button>
+          </div>
+          
+          <div id="deposit-loader" style="display:none;">
+            <img src="{% static 'image/loader.gif' %}" alt="loading">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Deposit Approve End -->
+
+<!-- Modal for Deposit Deny Start -->
+<div class="modal fade" id="deposit-deny" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">Deny Deposit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-danger">
+        Are you sure to deny the deposit submission?
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" id="deposit-deny-id-container">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">No, Back</button>
+        <button type="button" class="btn btn-danger deny-deposit">Yes, Deny</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Deposit Deny End -->
+
+<!-- Modal for Earning Approve Start -->
+<div class="modal fade" id="earning-approve" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Approve Earning Submission</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to approve the earning submission?
+      </div>
+      <div class="modal-footer">
+        <form method=POST>
+          {% csrf_token %}
+          <input type="hidden" id="earning-approve-id-container">
+          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">No, Back</button>
+          <button type="button" class="btn btn-success approve-earning">Yes, Approve</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Earning Approve End -->
+
+<!-- Modal for Earning Deny Start -->
+<div class="modal fade" id="earning-deny" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">Deny Earning Info.</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-danger">
+        Are you sure to deny the earning submission?
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" id="earning-deny-id-container">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">No, Back</button>
+        <button type="button" class="btn btn-danger deny-earning">Yes, Deny</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Earning Deny End -->
+
+
+<!-- Modal for Expenditure Approve Start -->
+<div class="modal fade" id="expenditure-approve" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Approve Expenditure Submission</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to approve the expenditure submission?
+      </div>
+      <div class="modal-footer">
+        <form method=POST>
+          {% csrf_token %}
+          <input type="hidden" id="expenditure-approve-id-container">
+          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">No, Back</button>
+          <button type="button" class="btn btn-success approve-expenditure">Yes, Approve</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Expenditure Approve End -->
+
+<!-- Modal for Expenditure Deny Start -->
+<div class="modal fade" id="expenditure-deny" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">Deny Expenditure Info.</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-danger">
+        Are you sure to deny the expenditure submission?
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" id="expenditure-deny-id-container">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">No, Back</button>
+        <button type="button" class="btn btn-danger deny-expenditure">Yes, Deny</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for Expenditure Deny End -->
+
+
+
+{% endblock content %}
+
+
+{% block javascripts %}
+
+    <script src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/js/responsive.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+
+{% endblock javascripts %}
